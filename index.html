@@ -438,8 +438,8 @@
     <hr class="masthead-rule-thin" />
     <span class="masthead-name">Chris Thomas</span>
     <div class="masthead-sub">
-      <span class="masthead-tagline">Writing &nbsp;·&nbsp; Ideas &nbsp;·&nbsp; Observations</span>
-      <span class="masthead-location">Kerala / Bangalore</span>
+      <span class="masthead-tagline">writing &nbsp;·&nbsp; ideas &nbsp;·&nbsp; observations</span>
+      <span class="masthead-location">kerala / bangalore</span>
     </div>
     <hr class="masthead-rule-bottom-thin" />
     <hr class="masthead-rule-bottom" />
@@ -454,26 +454,26 @@
   <main>
 
     <div class="page active" id="page-writing">
-      <p class="writing-intro">Notes on things I find interesting — technology, the world, consciousness, magick, whatever else crosses my mind.</p>
+      <p class="writing-intro">notes on things i find interesting — technology, the world, consciousness, magick, whatever else crosses my mind.</p>
       <ul class="post-list" id="post-list"></ul>
     </div>
 
     <div id="single-post">
-      <span class="back-link" onclick="closePost()">← Back to Writing</span>
+      <span class="back-link" onclick="closePost()">← back to writing</span>
       <div id="post-content"></div>
     </div>
 
     <div class="page" id="page-now">
       <div class="now-header">
-        <h1>Now</h1>
-        <span class="now-updated">Updated April 2026 &nbsp;·&nbsp; Kanjirappally, Kerala</span>
+        <h1>now</h1>
+        <span class="now-updated">updated april 2026 &nbsp;·&nbsp; kanjirappally, kerala</span>
       </div>
 
       <div class="now-section">
         <div class="now-section-label">Work</div>
         <div class="now-body">
-          <p>Senior PM at <strong>Avaana</strong>, an Australian healthtech startup. Currently building their Credits Engine — a double-entry ledger system underneath their corporate wellbeing platform. Distributed team, fully remote.</p>
-          <p>Relocating to Bangalore in roughly two months. Most of my professional life is already there anyway.</p>
+          <p>senior PM at <strong>avaana</strong>, an australian healthtech startup. currently building their credits engine — a double-entry ledger system underneath their corporate wellbeing platform. distributed team, fully remote.</p>
+          <p>relocating to bangalore in roughly two months. most of my professional life is already there anyway.</p>
         </div>
       </div>
 
@@ -482,8 +482,8 @@
       <div class="now-section">
         <div class="now-section-label">Reading / Thinking</div>
         <div class="now-body">
-          <p>Deep in <strong>Vedic astrology</strong> and how it maps onto Western esoteric systems — Hermeticism, Jungian shadow work, the broader question of whether consciousness is fundamental or emergent.</p>
-          <p>Also sitting with the overlap between magick as a practice and systems thinking as a discipline. More on this in writing soon.</p>
+          <p>deep in <strong>vedic astrology</strong> and how it maps onto western esoteric systems — hermeticism, jungian shadow work, the broader question of whether consciousness is fundamental or emergent.</p>
+          <p>also sitting with the overlap between magick as a practice and systems thinking as a discipline. more on this in writing soon.</p>
         </div>
       </div>
 
@@ -492,22 +492,22 @@
       <div class="now-section">
         <div class="now-section-label">Everything else</div>
         <div class="now-body">
-          <p>Rebuilding my gym routine after a month off — machine-based push/pull/legs. Goa trip coming up mid-April.</p>
-          <p>Ride a <strong>Gixxer SF 155</strong>. Did a solo Bangalore–Trichy–Kerala run last month. Watching the used Ninja 650 market with probably too much attention.</p>
+          <p>rebuilding my gym routine after a month off — machine-based push/pull/legs. goa trip coming up mid-april.</p>
+          <p>ride a <strong>gixxer SF 155</strong>. did a solo bangalore–trichy–kerala run last month. watching the used ninja 650 market with probably too much attention.</p>
         </div>
       </div>
     </div>
 
     <div class="page" id="page-about">
-      <div class="about-eyebrow">About</div>
-      <h1 class="about-name">Product manager.<br /><em>Non-linear background.</em></h1>
+      <div class="about-eyebrow">about</div>
+      <h1 class="about-name">product manager.<br /><em>non-linear background.</em></h1>
       <hr class="about-rule" />
       <div class="about-body">
-        <p>I work in product management at the intersection of health, technology, and distributed teams. Currently at Avaana, an Australian healthtech startup, where I own product strategy, roadmap, and a lot of the coordination that keeps things from falling apart.</p>
-        <p>My background is non-linear — nonprofit work, QA, a few detours that don't fit neatly on a CV, and then product. I think the roundabout path is part of why I find disparate things interesting and want to connect them.</p>
-        <p>This site is mostly a place to think out loud. Topics vary: technology, geopolitics, consciousness, magick, things I couldn't stop thinking about. No particular agenda. The range is the point.</p>
+        <p>i work in product management at the intersection of health, technology, and distributed teams. currently at avaana, an australian healthtech startup, where i own product strategy, roadmap, and a lot of the coordination that keeps things from falling apart.</p>
+        <p>my background is non-linear — nonprofit work, QA, a few detours that don't fit neatly on a CV, and then product. i think the roundabout path is part of why i find disparate things interesting and want to connect them.</p>
+        <p>this site is mostly a place to think out loud. topics vary: technology, geopolitics, consciousness, magick, things i couldn't stop thinking about. no particular agenda. the range is the point.</p>
       </div>
-      <div class="about-section-label">Elsewhere</div>
+      <div class="about-section-label">elsewhere</div>
       <div class="about-links">
         <a href="https://linkedin.com/in/chris-thomas396" target="_blank">
           LinkedIn <span class="link-arrow">↗</span>
@@ -526,54 +526,70 @@
 <script>
   const posts = [
     {
+      id: 'prototype-is-the-spec',
+      date: 'April 2026',
+      tag: ['tech', 'product'],
+      title: 'the prototype is the spec',
+      excerpt: "we\'ve been running a trial on my team — making all the pms learn git and contribute to code. not because i want them to become developers. because the old workflow is too slow for 2026.",
+      body: `<p>not because i want them to become developers. because i think the old workflow — write a spec, hand it to design, hand it to dev, watch it get built differently than you imagined — is genuinely too slow for 2026. and there\'s a better way now.</p>
+<p>it wasn\'t a grand plan. i set up a demo project with one of our frontend devs for an internal event. react + vite, nothing fancy. we used it to show a workflow to stakeholders, it went well, and then we just... kept going. that demo project is now the base we\'re building everything on. that\'s usually how the good stuff starts. not a roadmap item, just a thing that worked.</p>
+<p>the idea is simple. pms build working prototypes — using claude, codex, whatever — and check them with stakeholders before anything goes to development. not wireframes, not figma screens. something you can actually click through.</p>
+<p>while stakeholders are reviewing the UI, we wire up a service layer in parallel. the backend team looks at the live prototype and figures out what data needs to be sent, what needs to stay as frontend logic, what the endpoints should look like. they\'re not reasoning from a requirements doc. they\'re looking at a real thing.</p>
+<p>by the time stakeholders sign off on the UI, the backend team isn\'t starting from zero. the API contract is already being shaped. the handover is an actual artifact — commits, a codebase, a working demo — not a conversation.</p>
+<p>most teams skip the git part and end up with a graveyard of figma files and dead demo links. nobody can trace what version was shown to who. decisions get lost. git at the level a pm needs it — clone, branch, commit, push, raise a pr — is maybe a day of discomfort and then it\'s muscle memory. the "it\'s too technical" excuse has a pretty short shelf life when the tools are this accessible.</p>
+<p>something shifts once a pm has shipped even one prototype that went from their laptop to a stakeholder demo. they stop thinking of themselves as the person who writes specs. that mindset change is worth more than any individual skill.</p>
+<p>this isn\'t a moonshot. it\'s just contract-driven development with a shorter feedback loop. the data shapes, the actions, the states the UI needs to handle — all of it is already implicit in a working prototype. formalising it into a service layer isn\'t extra work, it\'s the natural next step.</p>
+<p>we\'re still building this out. but so far: it works.</p>`
+    },
+    {
       id: 'road-that-was-there',
       date: 'April 2026',
       tag: ['personal', 'ideas'],
-      title: 'The road that was there',
-      excerpt: 'Frost\'s poem isn\'t about the road less travelled. It\'s about how we invent the less-travelled road later, with a sigh, because we need the story to mean something.',
-      body: `<p>There's a kind of life that doesn't fit the stories we're given for it.</p>
-<p>Not the triumph story, where the hard years were secretly preparing you for something. Not the tragedy story, where one wrong turn at eighteen cost you the life you were supposed to have. Not the redemption story, where grinding hard enough eventually buys you out.</p>
-<p>Just a life that kept moving forward on whatever road was there when a road was needed. Accumulating weight. Accumulating skill. Accumulating quiet losses that never got a funeral.</p>
-<p>The cruelty isn't the hardship. It's that hardship doesn't resolve into meaning on its own.</p>
-<p>Frost knew this, and everyone misreads him for it. The two roads in the yellow wood were the same road. He says so in the poem — "really about the same," "equally lay." The less-travelled one is invented later, <em>with a sigh</em>, when he's old enough to need the story to mean something. Meaning isn't found at the fork. It's assigned at the desk, years after, by someone tired enough to need it.</p>
-<p>Most of us aren't carrying a wrong turn. We're carrying the ordinary friction of being a specific person in a specific place, making decisions with the information available, ending up somewhere we didn't picture at twenty-two. The gap between the imagined life and the lived one is real, and it's heavy, and it doesn't go away by being reframed. But it isn't evidence that you failed. It's evidence that you're alive and paying attention.</p>
-<p>The things you carry are real. The things you've built on top of them are also real — and more load-bearing than the scarcity in your head lets you feel. The house is standing. The siding has a crack. Those are different facts, and confusing them is how people spend decades bracing for a collapse that isn't coming.</p>
-<p>Here's the part nobody tells you: the work isn't escaping the cage or finding the keys. It's noticing, on a normal Wednesday, that the door has been open for a while, and walking out without needing the moment to mean anything.</p>
-<p>That's the whole thing. The rest is just weather.</p>`
+      title: 'the road that was there',
+      excerpt: 'frost\'s poem isn\'t about the road less travelled. it\'s about how we invent the less-travelled road later, with a sigh, because we need the story to mean something.',
+      body: `<p>there's a kind of life that doesn't fit the stories we're given for it.</p>
+<p>not the triumph story, where the hard years were secretly preparing you for something. not the tragedy story, where one wrong turn at eighteen cost you the life you were supposed to have. not the redemption story, where grinding hard enough eventually buys you out.</p>
+<p>just a life that kept moving forward on whatever road was there when a road was needed. accumulating weight. accumulating skill. accumulating quiet losses that never got a funeral.</p>
+<p>the cruelty isn't the hardship. it's that hardship doesn't resolve into meaning on its own.</p>
+<p>frost knew this, and everyone misreads him for it. the two roads in the yellow wood were the same road. he says so in the poem — "really about the same," "equally lay." the less-travelled one is invented later, <em>with a sigh</em>, when he's old enough to need the story to mean something. meaning isn't found at the fork. it's assigned at the desk, years after, by someone tired enough to need it.</p>
+<p>most of us aren't carrying a wrong turn. we're carrying the ordinary friction of being a specific person in a specific place, making decisions with the information available, ending up somewhere we didn't picture at twenty-two. the gap between the imagined life and the lived one is real, and it's heavy, and it doesn't go away by being reframed. but it isn't evidence that you failed. it's evidence that you're alive and paying attention.</p>
+<p>the things you carry are real. the things you've built on top of them are also real — and more load-bearing than the scarcity in your head lets you feel. the house is standing. the siding has a crack. those are different facts, and confusing them is how people spend decades bracing for a collapse that isn't coming.</p>
+<p>here's the part nobody tells you: the work isn't escaping the cage or finding the keys. it's noticing, on a normal wednesday, that the door has been open for a while, and walking out without needing the moment to mean anything.</p>
+<p>that's the whole thing. the rest is just weather.</p>`
     },
     {
       id: 'magick-systems-thinking',
       date: 'March 2026',
       tag: ['consciousness', 'ideas'],
-      title: 'Magick and systems thinking are the same thing',
-      excerpt: 'The Hermetic axiom "as above, so below" is basically just saying that patterns self-replicate across scales. Which is also what complexity theory says. I don\'t think this is a coincidence.',
-      body: `<p>The Hermetic axiom "as above, so below" is usually treated as mystical shorthand — something you put on a poster. But spend enough time in systems thinking and you start to notice it's making a precise structural claim: patterns self-replicate across scales of organisation. The same shapes recur. The micro mirrors the macro.</p>
-<p>Complexity theory says roughly the same thing. Emergence, feedback loops, attractor states — these are formalisms for describing how order arises from noise, how a system develops properties that weren't present in its components. The alchemists said you couldn't understand gold without understanding the Sun. The cyberneticists said you couldn't understand a system without understanding its environment. Same argument, different costumes.</p>
-<p>What I find interesting is that <em>ritual</em> — the core technology of magick — is essentially a practice of directing attention deliberately. You're not summoning demons. You're engineering your own pattern of perception. You're deciding, in advance, what to notice and amplify. This is also what good product strategy is. You pick a frame. You commit to it. The frame shapes what data you see, which shapes what you build.</p>
-<p>None of this collapses the distinction between empirical science and occult practice. But I think the dismissal is too easy. The question isn't whether the universe responds to ritual — it's whether the practitioner does. And that's not mystical at all. That's just psychology with better aesthetics.</p>`
+      title: 'magick and systems thinking are the same thing',
+      excerpt: 'the hermetic axiom "as above, so below" is basically just saying that patterns self-replicate across scales. which is also what complexity theory says. i don\'t think this is a coincidence.',
+      body: `<p>the hermetic axiom "as above, so below" is usually treated as mystical shorthand — something you put on a poster. but spend enough time in systems thinking and you start to notice it's making a precise structural claim: patterns self-replicate across scales of organisation. the same shapes recur. the micro mirrors the macro.</p>
+<p>complexity theory says roughly the same thing. emergence, feedback loops, attractor states — these are formalisms for describing how order arises from noise, how a system develops properties that weren't present in its components. the alchemists said you couldn't understand gold without understanding the sun. the cyberneticists said you couldn't understand a system without understanding its environment. same argument, different costumes.</p>
+<p>what i find interesting is that <em>ritual</em> — the core technology of magick — is essentially a practice of directing attention deliberately. you're not summoning demons. you're engineering your own pattern of perception. you're deciding, in advance, what to notice and amplify. this is also what good product strategy is. you pick a frame. you commit to it. the frame shapes what data you see, which shapes what you build.</p>
+<p>none of this collapses the distinction between empirical science and occult practice. but i think the dismissal is too easy. the question isn't whether the universe responds to ritual — it's whether the practitioner does. and that's not mystical at all. that's just psychology with better aesthetics.</p>`
     },
     {
       id: 'on-relocation',
       date: 'February 2026',
       tag: ['personal', 'india'],
-      title: 'On moving to a city you already half-live in',
-      excerpt: 'Bangalore is not new to me. I\'ve been floating in and out for years. The strange thing about finally committing to it is that it doesn\'t feel like arrival — it feels like admitting something.',
-      body: `<p>Bangalore is not new to me. I've been staying there for work, floating in and out for years. The strange thing about finally committing to it is that it doesn't feel like arrival — it feels like admitting something.</p>
-<p>Kerala will always be home in the way that places you grew up become home: involuntarily, permanently. Kanjirappally especially — small enough that everyone knows everyone's business, green enough that you remember what air is supposed to smell like. But it was never a place I was going to build a life from. Not the kind of life I want, anyway.</p>
-<p>The practical reasons for Bangalore are obvious. The professional network is there. The kind of people I want to think with are there. The weather is only mildly terrible. But when I try to name what I'm actually moving toward, it's something more like <em>density</em> — the feeling that things are happening and I might be in the room where they happen.</p>
-<p>Maybe that's a fantasy. Maybe the room is just another room. But I think you have to bet on the version of your life where it isn't.</p>`
+      title: 'on moving to a city you already half-live in',
+      excerpt: 'bangalore is not new to me. i\'ve been floating in and out for years. the strange thing about finally committing to it is that it doesn\'t feel like arrival — it feels like admitting something.',
+      body: `<p>bangalore is not new to me. i've been staying there for work, floating in and out for years. the strange thing about finally committing to it is that it doesn't feel like arrival — it feels like admitting something.</p>
+<p>kerala will always be home in the way that places you grew up become home: involuntarily, permanently. kanjirappally especially — small enough that everyone knows everyone's business, green enough that you remember what air is supposed to smell like. but it was never a place i was going to build a life from. not the kind of life i want, anyway.</p>
+<p>the practical reasons for bangalore are obvious. the professional network is there. the kind of people i want to think with are there. the weather is only mildly terrible. but when i try to name what i'm actually moving toward, it's something more like <em>density</em> — the feeling that things are happening and i might be in the room where they happen.</p>
+<p>maybe that's a fantasy. maybe the room is just another room. but i think you have to bet on the version of your life where it isn't.</p>`
     },
     {
       id: 'ai-product-management',
       date: 'January 2026',
       tag: ['tech', 'product'],
-      title: 'What AI actually changes about being a PM',
-      excerpt: 'Not the hype version. The version I\'ve lived for the last six months, building product at a startup while using an AI as a thinking partner on roughly half my decisions.',
-      body: `<p>Not the hype version. The version I've lived for the last six months building product at a startup while using an AI as a thinking partner on roughly half my significant decisions.</p>
-<p>The obvious wins: faster first drafts of specs, PRDs, and user stories. Decent rubber duck for logic-checking. Good enough at pulling apart a vague requirement until it becomes concrete. These are real. They save maybe five to eight hours a week. That's not nothing.</p>
-<p>But the less obvious thing — and I think this is more important — is that it changes what <em>thinking</em> costs. When a thought is expensive to develop, you think fewer thoughts. You pattern-match more, because pattern-matching is cheap. You skip the exploratory detour because you can't afford it. An AI interlocutor that's available at 2am and has infinite patience makes the exploratory detour free. You take it. Sometimes the detour was the point.</p>
-<p>What it doesn't change: judgment. Prioritisation. The political read on why a stakeholder is pushing a particular agenda. The instinct that a technically correct solution is going to be socially rejected by the team. These things still require a human who has been paying attention. For now.</p>
-<p>The PMs who will struggle aren't the ones who refuse to use AI. They're the ones who outsource judgment to it and call the output strategy.</p>`
+      title: 'what AI actually changes about being a PM',
+      excerpt: 'not the hype version. the version i\'ve lived for the last six months, building product at a startup while using an AI as a thinking partner on roughly half my decisions.',
+      body: `<p>not the hype version. the version i've lived for the last six months building product at a startup while using an AI as a thinking partner on roughly half my significant decisions.</p>
+<p>the obvious wins: faster first drafts of specs, PRDs, and user stories. decent rubber duck for logic-checking. good enough at pulling apart a vague requirement until it becomes concrete. these are real. they save maybe five to eight hours a week. that's not nothing.</p>
+<p>but the less obvious thing — and i think this is more important — is that it changes what <em>thinking</em> costs. when a thought is expensive to develop, you think fewer thoughts. you pattern-match more, because pattern-matching is cheap. you skip the exploratory detour because you can't afford it. an AI interlocutor that's available at 2am and has infinite patience makes the exploratory detour free. you take it. sometimes the detour was the point.</p>
+<p>what it doesn't change: judgment. prioritisation. the political read on why a stakeholder is pushing a particular agenda. the instinct that a technically correct solution is going to be socially rejected by the team. these things still require a human who has been paying attention. for now.</p>
+<p>the PMs who will struggle aren't the ones who refuse to use AI. they're the ones who outsource judgment to it and call the output strategy.</p>`
     }
   ];
 
