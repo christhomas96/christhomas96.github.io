@@ -14,17 +14,17 @@ function fmtDate(d: Date) {
 
 <Base title="The Workshop — Chris Thomas" description="Product work, things I build, tech writing.">
   <main class="room">
-    <a href="/" class="back mono">← threshold</a>
+    <a href="/hall" class="back mono">← hallway</a>
 
-    <header class="room-header">
+    <header class="room-header" style="view-transition-name: door-workshop">
       <h1 class="room-name mono">The Workshop</h1>
       <p class="mono room-intro">product work. things built. how the systems actually run.</p>
     </header>
 
     {posts.length === 0 ? (
-      <p class="empty mono">nothing on the bench yet.</p>
+      <p class="empty mono enter">nothing on the bench yet.</p>
     ) : (
-      <ul class="post-list">
+      <ul class="post-list enter">
         {posts.map(post => (
           <li class="post-item">
             <a href={`/workshop/${post.id}`} class="post-link">
@@ -47,6 +47,18 @@ function fmtDate(d: Date) {
     max-width: 680px;
     margin: 0 auto;
     padding: 3rem 2rem 6rem;
+  }
+
+  /* The Workshop's air — a flat, even work-light from above. Functional,
+     not atmospheric: the bench is simply lit. */
+  .room::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse 90% 55% at 68% -4%,
+      rgba(200, 152, 64, 0.035) 0%, transparent 72%);
   }
 
   .back {

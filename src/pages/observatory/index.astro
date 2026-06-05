@@ -14,17 +14,17 @@ function fmtDate(d: Date) {
 
 <Base title="The Observatory — Chris Thomas" description="Hermetics, cosmology, and pattern — things that rhyme across scales.">
   <main class="room">
-    <a href="/" class="back mono">← threshold</a>
+    <a href="/hall" class="back mono">← hallway</a>
 
-    <header class="room-header">
+    <header class="room-header" style="view-transition-name: door-observatory">
       <h1 class="room-name">The Observatory</h1>
       <p class="room-intro">hermetics, cosmology, pattern — things that rhyme across scales. astrology as a lens, lightly held.</p>
     </header>
 
     {posts.length === 0 ? (
-      <p class="empty mono">no charts plotted yet.</p>
+      <p class="empty mono enter">no charts plotted yet.</p>
     ) : (
-      <ul class="post-list">
+      <ul class="post-list enter">
         {posts.map(post => (
           <li class="post-item">
             <a href={`/observatory/${post.id}`} class="post-link">
@@ -47,6 +47,18 @@ function fmtDate(d: Date) {
     max-width: 680px;
     margin: 0 auto;
     padding: 3rem 2rem 6rem;
+  }
+
+  /* The Observatory's air — cold astral light from high above, the one
+     place the blue counter-tone breathes. */
+  .room::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse 60% 50% at 62% 6%,
+      rgba(122, 172, 202, 0.06) 0%, transparent 68%);
   }
 
   .back {

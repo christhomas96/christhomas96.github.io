@@ -14,20 +14,20 @@ function fmtDate(d: Date) {
 
 <Base title="The Long Room — Chris Thomas" description="Shadow-work, meaning, the interior.">
   <main class="room">
-    <a href="/" class="back mono">← threshold</a>
+    <a href="/hall" class="back mono">← hallway</a>
 
-    <header class="room-header">
+    <header class="room-header" style="view-transition-name: door-long-room">
       <h1 class="room-name">The Long Room</h1>
       <p class="room-intro">further in. shadow and meaning. the interior.</p>
     </header>
 
     {posts.length === 0 ? (
-      <p class="empty">
+      <p class="empty enter-slow">
         nothing here yet.<br />
         <span class="mono note">further in the house. the door is open.</span>
       </p>
     ) : (
-      <ul class="post-list">
+      <ul class="post-list enter-slow">
         {posts.map(post => (
           <li class="post-item">
             <a href={`/long-room/${post.id}`} class="post-link">
@@ -50,6 +50,21 @@ function fmtDate(d: Date) {
     max-width: 620px;
     margin: 0 auto;
     padding: 3rem 2rem 6rem;
+  }
+
+  /* The Long Room's air — deepest in the house. A single dim pool far off,
+     and the edges darken inward, so it feels further in and quieter. */
+  .room::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 48% 38% at 50% 96%,
+        rgba(200, 152, 64, 0.03) 0%, transparent 70%),
+      radial-gradient(ellipse 130% 90% at 50% 50%,
+        transparent 42%, rgba(0, 0, 0, 0.45) 100%);
   }
 
   .back {

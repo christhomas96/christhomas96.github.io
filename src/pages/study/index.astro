@@ -14,14 +14,14 @@ function fmtDate(d: Date) {
 
 <Base title="The Study — Chris Thomas" description="Writing — essays, half-formed thoughts, eclectic posts.">
   <main class="room">
-    <a href="/" class="back mono">← threshold</a>
+    <a href="/hall" class="back mono">← hallway</a>
 
-    <header class="room-header">
+    <header class="room-header" style="view-transition-name: door-study">
       <h1 class="room-name">The Study</h1>
       <p class="room-intro">essays, half-formed thoughts, and things i couldn't stop thinking about.</p>
     </header>
 
-    <ul class="post-list">
+    <ul class="post-list enter">
       {posts.map(post => (
         <li class="post-item">
           <a href={`/study/${post.id}`} class="post-link">
@@ -43,6 +43,17 @@ function fmtDate(d: Date) {
     max-width: 680px;
     margin: 0 auto;
     padding: 3rem 2rem 6rem;
+  }
+
+  /* The Study's air — a warm pool low and to the side, candle-warm. */
+  .room::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse 70% 55% at 32% 92%,
+      rgba(200, 152, 64, 0.05) 0%, transparent 70%);
   }
 
   .back {

@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 
 <Base title="About — Chris Thomas" description="Product manager. Non-linear background.">
   <main class="about-page">
+    <a href="/hall" class="back mono">← hallway</a>
     <p class="mono eyebrow">about</p>
     <h1>product manager.<br /><em>non-linear background.</em></h1>
 
@@ -28,8 +29,20 @@ import Base from '../layouts/Base.astro';
   .about-page {
     max-width: 640px;
     margin: 0 auto;
-    padding: 4rem 2rem 6rem;
+    padding: 3rem 2rem 6rem;
   }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    transition: color 0.3s var(--ease-drift);
+  }
+  .back:hover { color: var(--color-gold); opacity: 1; }
 
   .eyebrow {
     font-size: 0.65rem;
