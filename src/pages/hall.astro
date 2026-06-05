@@ -1,0 +1,461 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="The Hallway — Chris Thomas" description="A hallway in the house of ideas — doors on either side, a room at the end.">
+  <div class="hall" aria-label="Hallway of the memory palace">
+
+    <a href="/" class="exit mono" aria-label="Back out the front door">← out</a>
+
+    <div class="hall-scene">
+
+      <!-- Floor & ceiling planes rake away to the vanishing point, turning
+           the doors from floating cards into a tunnel. Soft light only —
+           no wireframe — so it stays atmosphere, not blueprint. -->
+      <div class="surface floor" aria-hidden="true"></div>
+      <div class="surface ceiling" aria-hidden="true"></div>
+
+      <!-- Faint section names etched on each wall, lying on the wall plane. -->
+      <span class="wall-label wall-left mono" aria-hidden="true">writing · making</span>
+      <span class="wall-label wall-right mono" aria-hidden="true">cosmos · present</span>
+
+      <!-- Side doors sit on the left/right walls in perspective; the end door
+           caps the corridor. --tx/--tz/--ry place each in 3D (desktop);
+           --depth/--side drive the flat telescoping fallback (mobile). -->
+
+      <a href="/study" class="hall-door left" data-room="study"
+         style="--tx:-310px; --tz:-30px; --ry:33deg; --depth:0; --side:-1; view-transition-name:door-study">
+        <div class="door-glow" aria-hidden="true"></div>
+        <div class="door-frame">
+          <span class="mono door-num">I</span>
+          <div class="door-text">
+            <h2 class="door-name">The Study</h2>
+            <p class="mono door-desc">writing &amp; essays</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/observatory" class="hall-door right" data-room="observatory"
+         style="--tx:310px; --tz:-30px; --ry:-33deg; --depth:1; --side:1; view-transition-name:door-observatory">
+        <div class="door-glow observatory-glow" aria-hidden="true"></div>
+        <div class="door-frame">
+          <span class="mono door-num">II</span>
+          <div class="door-text">
+            <h2 class="door-name">The Observatory</h2>
+            <p class="mono door-desc">cosmos &amp; pattern</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/workshop" class="hall-door left" data-room="workshop"
+         style="--tx:-340px; --tz:-540px; --ry:31deg; --depth:2; --side:-1; view-transition-name:door-workshop">
+        <div class="door-glow" aria-hidden="true"></div>
+        <div class="door-frame">
+          <span class="mono door-num">III</span>
+          <div class="door-text">
+            <h2 class="door-name">The Workshop</h2>
+            <p class="mono door-desc">product &amp; making</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/now" class="hall-door right now-door" data-room="now"
+         style="--tx:340px; --tz:-540px; --ry:-31deg; --depth:3; --side:1; view-transition-name:door-now">
+        <div class="door-glow" aria-hidden="true"></div>
+        <div class="door-frame">
+          <span class="mono door-num">IV</span>
+          <div class="door-text">
+            <h2 class="door-name">Now</h2>
+            <p class="mono door-desc">present &amp; here</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/long-room" class="hall-door end" data-room="long-room"
+         style="--tx:0px; --tz:-760px; --ry:0deg; --depth:4; --side:0; view-transition-name:door-long-room">
+        <div class="door-glow" aria-hidden="true"></div>
+        <span class="ajar" aria-hidden="true"></span>
+        <div class="door-frame">
+          <span class="mono door-num">V</span>
+          <div class="door-text">
+            <h2 class="door-name">The Long Room</h2>
+            <p class="mono door-desc">shadow &amp; meaning</p>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <footer class="hall-footer">
+      <nav class="mono footer-nav" aria-label="Secondary pages">
+        <a href="/about">About</a>
+      </nav>
+    </footer>
+
+  </div>
+</Base>
+
+<style>
+  .hall {
+    position: relative;
+    min-height: 100dvh;
+    overflow: hidden;
+    /* The depth of the corridor. perspective-origin is leaned by script. */
+    perspective: 1100px;
+    perspective-origin: 50% 44%;
+    transition: perspective-origin 0.6s var(--ease-drift);
+    /* The front door morphs open into the hall. */
+    view-transition-name: front-door;
+  }
+
+  /* The far light — pooled at the vanishing point behind the end door. */
+  .hall::before {
+    content: '';
+    position: fixed;
+    top: 44%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 32vw;
+    height: 36vh;
+    background: radial-gradient(ellipse,
+      rgba(200, 152, 64, 0.14) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: hall-breathe 16s ease-in-out infinite;
+  }
+
+  /* The floor — light on the ground nearest the viewer. */
+  .hall::after {
+    content: '';
+    position: fixed;
+    inset: auto 0 0 0;
+    height: 40vh;
+    background: radial-gradient(ellipse 80% 100% at 50% 100%,
+      rgba(200, 152, 64, 0.05) 0%, transparent 72%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes hall-breathe {
+    0%, 100% { opacity: 0.75; }
+    50%      { opacity: 1; }
+  }
+
+  .hall-scene {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    z-index: 1;
+    /* The scene plane sits at Z=0, in front of the doors (negative Z), so it
+       would swallow every click. Make it transparent to the pointer and let
+       only the doors catch events. */
+    pointer-events: none;
+  }
+
+  /* ── Floor & ceiling — raked planes that close the corridor ── */
+  .surface {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1600px;
+    height: 1500px;
+    margin: -750px 0 0 -800px;
+    pointer-events: none;
+  }
+  .floor {
+    transform: rotateX(89deg) translateZ(170px);
+    background:
+      /* A runner of light down the centre, leading to the Long Room. */
+      linear-gradient(to right,
+        transparent 46.5%, rgba(200, 152, 64, 0.06) 50%, transparent 53.5%),
+      radial-gradient(ellipse 34% 50% at 50% 22%,
+        rgba(200, 152, 64, 0.07) 0%, transparent 58%),
+      linear-gradient(to top,
+        rgba(0, 0, 0, 0.5) 0%, transparent 55%);
+  }
+  .ceiling {
+    transform: rotateX(-89deg) translateZ(170px);
+    background:
+      radial-gradient(ellipse 30% 45% at 50% 22%,
+        rgba(200, 152, 64, 0.03) 0%, transparent 55%),
+      linear-gradient(to top,
+        rgba(0, 0, 0, 0.6) 0%, transparent 50%);
+  }
+
+  /* ── Faint labels painted on the walls ── */
+  .wall-label {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 0;
+    white-space: nowrap;
+    font-size: 0.6rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--color-gold-dim);
+    opacity: 0.16;
+    pointer-events: none;
+    transform-origin: center;
+  }
+  .wall-left  { transform: translate3d(-336px, -126px, -300px) rotateY(33deg); }
+  .wall-right { transform: translate3d(336px, -126px, -300px) rotateY(-33deg); }
+
+  /* ── A door on the wall ── */
+  .hall-door {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140px;
+    height: 198px;
+    margin: -118px 0 0 -70px;          /* lift above centre so floor reads */
+    transform-origin: center center;
+    transform: translate3d(var(--tx), 0, var(--tz)) rotateY(var(--ry));
+
+    border: 1px solid rgba(200, 152, 64, 0.14);
+    background: linear-gradient(175deg,
+      rgba(200, 152, 64, 0.02) 0%,
+      rgba(200, 152, 64, 0.06) 100%);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    pointer-events: auto;          /* doors catch clicks; the scene does not */
+
+    transition:
+      transform     0.7s var(--ease-drift),
+      border-color  0.7s var(--ease-drift),
+      box-shadow    0.7s var(--ease-drift);
+  }
+
+  .end {
+    width: 168px;
+    height: 240px;
+    margin: -150px 0 0 -84px;
+  }
+
+  /* The Long Room door stands slightly ajar — a warm gap leaking light. */
+  .end .ajar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 16%;
+    width: 22%;
+    background: linear-gradient(to right,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(200, 152, 64, 0.28) 30%,
+      rgba(200, 152, 64, 0.06) 100%);
+    box-shadow: 0 0 34px rgba(200, 152, 64, 0.22);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .end { border-color: rgba(200, 152, 64, 0.28); }
+
+  .door-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 110%,
+      rgba(200, 152, 64, 0.16) 0%, transparent 70%);
+    opacity: 0.12;
+    transition: opacity 0.8s var(--ease-drift);
+    pointer-events: none;
+  }
+
+  .observatory-glow {
+    background: radial-gradient(ellipse 80% 60% at 50% 110%,
+      rgba(122, 172, 202, 0.18) 0%, transparent 70%) !important;
+  }
+
+  /* Now is the small, lit, present room — its door stays a touch warmer. */
+  .now-door { border-color: rgba(200, 152, 64, 0.22); }
+  .now-door .door-glow { opacity: 0.22; }
+
+  /* Approaching a door — it turns to face you, advances, and brightens. */
+  .hall-door:hover,
+  .hall-door:focus-visible {
+    transform:
+      translate3d(var(--tx), 0, calc(var(--tz) + 75px))
+      rotateY(calc(var(--ry) * 0.35));
+    border-color: rgba(200, 152, 64, 0.45);
+    box-shadow: 0 0 60px rgba(200, 152, 64, 0.06);
+    outline: none;
+  }
+
+  .hall-door[data-room="observatory"]:hover,
+  .hall-door[data-room="observatory"]:focus-visible {
+    border-color: rgba(122, 172, 202, 0.4);
+    box-shadow: 0 0 50px rgba(122, 172, 202, 0.05);
+  }
+
+  .hall-door:hover .door-glow,
+  .hall-door:focus-visible .door-glow {
+    opacity: 1;
+  }
+
+  .door-frame {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 1rem 1.15rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .door-num {
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
+    color: var(--color-gold-dim);
+  }
+
+  .door-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: 0.22rem;
+    transition: color 0.5s var(--ease-drift);
+  }
+
+  .hall-door:hover .door-name,
+  .hall-door:focus-visible .door-name { color: var(--color-gold); }
+
+  .hall-door[data-room="observatory"]:hover .door-name { color: var(--color-blue); }
+
+  .door-desc {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Exit + footer ── */
+  .exit {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    transition: color 0.3s var(--ease-drift);
+  }
+  .exit:hover { color: var(--color-gold); opacity: 1; }
+
+  .hall-footer {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 5;
+  }
+  .footer-nav {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .footer-nav a { color: var(--color-text-muted); transition: color 0.35s var(--ease-drift); }
+  .footer-nav a:hover { color: var(--color-gold); opacity: 1; }
+
+  /* ── Mobile / narrow — drop the 3D entirely for a plain, legible list ── */
+  @media (max-width: 720px) {
+    .hall { perspective: none; }
+
+    /* All the 3D dressing goes — keep it simple. */
+    .surface,
+    .wall-label,
+    .end .ajar,
+    .door-glow { display: none; }
+
+    .hall::before { top: 22%; width: 60vw; height: 34vh; }
+    .hall::after  { height: 28vh; }
+
+    .hall-scene {
+      position: static;
+      transform-style: flat;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      min-height: 100dvh;
+      gap: 0.7rem;
+      padding: 4.75rem 1.25rem 4.25rem;
+    }
+
+    /* Every room is a plain, full-width row — same size, fully legible. */
+    .hall-door,
+    .end {
+      position: relative;
+      top: auto;
+      left: auto;
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      aspect-ratio: auto;
+      min-height: 76px;
+      margin: 0 auto;
+      transform: none;
+      opacity: 1;
+      filter: none;
+      z-index: auto;
+    }
+
+    .door-frame {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.15rem;
+    }
+
+    .door-num { min-width: 1.4rem; }
+    .door-name { font-size: 1.05rem; margin-bottom: 0.1rem; }
+    .door-desc { font-size: 0.56rem; }
+
+    /* Tap feedback in place of the desktop hover bloom. */
+    .hall-door:active { border-color: rgba(200, 152, 64, 0.45); }
+    .hall-door[data-room="observatory"]:active { border-color: rgba(122, 172, 202, 0.45); }
+  }
+</style>
+
+<script>
+  // Lean the corridor's vanishing point toward the pointer / phone tilt, so
+  // the hallway feels inhabited. Re-bound on each view transition; skipped
+  // under reduced motion. Mobile (no perspective) simply ignores this.
+  function initHallParallax() {
+    const hall = document.querySelector<HTMLElement>('.hall');
+    if (!hall) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const lean = (nx: number, ny: number) => {
+      hall.style.perspectiveOrigin = `${50 + nx * 8}% ${46 + ny * 5}%`;
+    };
+
+    let raf = 0;
+    hall.addEventListener('pointermove', (e) => {
+      const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+      const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+      if (raf) return;
+      raf = requestAnimationFrame(() => { lean(nx, ny); raf = 0; });
+    });
+    hall.addEventListener('pointerleave', () => lean(0, 0));
+
+    if (!(window as any).__hallTiltBound) {
+      (window as any).__hallTiltBound = true;
+      window.addEventListener('deviceorientation', (e) => {
+        const h = document.querySelector<HTMLElement>('.hall');
+        if (!h || e.gamma == null || e.beta == null) return;
+        const clamp = (v: number) => Math.max(-1, Math.min(1, v));
+        h.style.perspectiveOrigin =
+          `${50 + clamp(e.gamma / 28) * 8}% ${46 + clamp((e.beta - 42) / 28) * 5}%`;
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', initHallParallax);
+</script>
