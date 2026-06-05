@@ -1,0 +1,138 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const all = await getCollection('posts', ({ data }) => !data.draft);
+const posts = all
+  .filter(p => p.data.room === 'observatory')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function fmtDate(d: Date) {
+  return d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+}
+---
+
+<Base title="The Observatory — Chris Thomas" description="Hermetics, cosmology, and pattern — things that rhyme across scales.">
+  <main class="room">
+    <a href="/" class="back mono">← threshold</a>
+
+    <header class="room-header">
+      <h1 class="room-name">The Observatory</h1>
+      <p class="room-intro">hermetics, cosmology, pattern — things that rhyme across scales. astrology as a lens, lightly held.</p>
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="empty mono">no charts plotted yet.</p>
+    ) : (
+      <ul class="post-list">
+        {posts.map(post => (
+          <li class="post-item">
+            <a href={`/observatory/${post.id}`} class="post-link">
+              <p class="mono post-meta">
+                {fmtDate(post.data.date)}
+                {post.data.tags.length > 0 && <span class="tags"> · {post.data.tags.join(', ')}</span>}
+              </p>
+              <h2 class="post-title">{post.data.title}</h2>
+              <p class="post-excerpt">{post.data.excerpt}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </main>
+</Base>
+
+<style>
+  .room {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+    transition: color 0.3s var(--ease-drift);
+  }
+
+  .back:hover { color: var(--accent); opacity: 1; }
+
+  .room-header {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(122, 172, 202, 0.2);
+  }
+
+  .room-name {
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 0.01em;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .room-intro {
+    font-style: italic;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    max-width: 52ch;
+  }
+
+  .empty {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .post-list { list-style: none; }
+
+  .post-item { border-bottom: 1px solid rgba(122, 172, 202, 0.12); }
+
+  .post-link {
+    display: block;
+    padding: 2rem 0;
+    color: inherit;
+    transition: none;
+  }
+
+  .post-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .post-link:hover .post-title { color: var(--accent); }
+
+  .post-meta {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .tags { text-transform: none; letter-spacing: 0.04em; }
+
+  .post-title {
+    font-size: clamp(1.3rem, 3vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 0.65rem;
+    color: var(--color-text);
+    transition: color 0.3s var(--ease-drift);
+  }
+
+  .post-excerpt {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    max-width: 62ch;
+  }
+
+  /* Observatory uses the cold counter-tone */
+  :root { --accent: var(--color-blue); }
+</style>

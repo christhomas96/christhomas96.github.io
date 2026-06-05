@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const all = await getCollection('posts', ({ data }) => !data.draft);
+const posts = all
+  .filter(p => p.data.room === 'study')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function fmtDate(d: Date) {
+  return d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+}
+---
+
+<Base title="The Study — Chris Thomas" description="Writing — essays, half-formed thoughts, eclectic posts.">
+  <main class="room">
+    <a href="/" class="back mono">← threshold</a>
+
+    <header class="room-header">
+      <h1 class="room-name">The Study</h1>
+      <p class="room-intro">essays, half-formed thoughts, and things i couldn't stop thinking about.</p>
+    </header>
+
+    <ul class="post-list">
+      {posts.map(post => (
+        <li class="post-item">
+          <a href={`/study/${post.id}`} class="post-link">
+            <p class="mono post-meta">
+              {fmtDate(post.data.date)}
+              {post.data.tags.length > 0 && <span class="tags"> · {post.data.tags.join(', ')}</span>}
+            </p>
+            <h2 class="post-title">{post.data.title}</h2>
+            <p class="post-excerpt">{post.data.excerpt}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>
+
+<style>
+  .room {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    transition: color 0.3s var(--ease-drift);
+  }
+
+  .back:hover {
+    color: var(--color-gold);
+    opacity: 1;
+  }
+
+  .room-header {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .room-name {
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 0.01em;
+    margin-bottom: 0.75rem;
+  }
+
+  .room-intro {
+    font-style: italic;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    max-width: 52ch;
+  }
+
+  .post-list {
+    list-style: none;
+  }
+
+  .post-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-link {
+    display: block;
+    padding: 2rem 0;
+    color: inherit;
+    transition: none;
+  }
+
+  .post-link:hover .post-title {
+    color: var(--color-gold);
+  }
+
+  .post-link:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .post-meta {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .tags {
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
+
+  .post-title {
+    font-size: clamp(1.3rem, 3vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 0.65rem;
+    color: var(--color-text);
+    transition: color 0.3s var(--ease-drift);
+  }
+
+  .post-excerpt {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    max-width: 62ch;
+  }
+</style>

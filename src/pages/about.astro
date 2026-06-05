@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="About — Chris Thomas" description="Product manager. Non-linear background.">
+  <main class="about-page">
+    <p class="mono eyebrow">about</p>
+    <h1>product manager.<br /><em>non-linear background.</em></h1>
+
+    <hr class="rule" />
+
+    <div class="about-body">
+      <p>i work in product management at the intersection of health, technology, and distributed teams. currently at avaana, an australian healthtech startup, where i own product strategy, roadmap, and a lot of the coordination that keeps things from falling apart.</p>
+      <p>my background is non-linear — nonprofit work, QA, a few detours that don't fit neatly on a CV, and then product. i think the roundabout path is part of why i find disparate things interesting and want to connect them.</p>
+      <p>this site is mostly a place to think out loud. topics vary: technology, geopolitics, consciousness, magick, things i couldn't stop thinking about. no particular agenda. the range is the point.</p>
+    </div>
+
+    <p class="mono section-label">elsewhere</p>
+    <nav class="about-links">
+      <a href="https://linkedin.com/in/chris-thomas396" target="_blank" rel="noopener noreferrer">
+        LinkedIn <span class="arrow">↗</span>
+      </a>
+    </nav>
+  </main>
+</Base>
+
+<style>
+  .about-page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    line-height: 1.2;
+    margin-bottom: 0;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--color-gold);
+  }
+
+  .rule {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 2.5rem 0;
+  }
+
+  .about-body p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    margin-bottom: 1.25em;
+    max-width: 60ch;
+  }
+
+  .about-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    display: block;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .about-links {
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-links a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    transition: color 0.3s var(--ease-drift);
+  }
+
+  .about-links a:hover {
+    color: var(--color-text);
+    opacity: 1;
+  }
+
+  .arrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+</style>

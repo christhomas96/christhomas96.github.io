@@ -1,0 +1,170 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts
+    .filter(p => p.data.room === 'study')
+    .map(post => ({
+      params: { slug: post.id },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const dateStr = post.data.date.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+---
+
+<Base title={`${post.data.title} — Chris Thomas`} description={post.data.excerpt}>
+  <article class="post-article">
+    <a href="/study" class="back mono">← the study</a>
+
+    <header class="post-header">
+      <h1 class="post-title">{post.data.title}</h1>
+      <div class="post-meta mono">
+        <span class="date">{dateStr}</span>
+        {post.data.tags.length > 0 && (
+          <span class="tags">
+            {post.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+          </span>
+        )}
+      </div>
+    </header>
+
+    <hr class="divider" />
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .post-article {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+    transition: color 0.3s var(--ease-drift);
+  }
+
+  .back:hover {
+    color: var(--color-gold);
+    opacity: 1;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .post-title {
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
+
+  .tag {
+    border: 1px solid var(--color-border);
+    padding: 2px 8px;
+    border-radius: 2px;
+    color: var(--color-text-muted);
+    font-size: 0.65rem;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 2rem 0 2.5rem;
+  }
+
+  /* ── Prose (rendered markdown) ── */
+  .prose {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--color-text-muted);
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.5em;
+    max-width: 66ch;
+  }
+
+  /* Drop cap — manuscript feel */
+  .prose :global(p:first-of-type::first-letter) {
+    font-family: var(--font-serif);
+    font-size: 3.6em;
+    font-weight: 600;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.06em;
+    color: var(--color-gold);
+  }
+
+  .prose :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .prose :global(em) {
+    color: var(--color-text);
+    font-style: italic;
+  }
+
+  .prose :global(strong) {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .prose :global(a) {
+    color: var(--color-gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .prose :global(blockquote) {
+    border-left: 2px solid var(--color-gold-dim);
+    padding-left: 1.25rem;
+    margin: 1.5em 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--color-text);
+    background: var(--color-surface);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+</style>

@@ -1,0 +1,318 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="The Memory Palace — Chris Thomas">
+  <div class="palace">
+
+    <header class="palace-header">
+      <span class="mono site-name">Chris Thomas</span>
+    </header>
+
+    <main class="threshold" aria-label="Rooms of the memory palace">
+
+      <!-- Active rooms are <a> links. Unbuilt rooms are <div> — dark, unlit, not yet passable. -->
+
+      <a href="/study" class="doorway" data-room="study">
+        <div class="doorway-glow" aria-hidden="true"></div>
+        <div class="doorway-frame">
+          <span class="mono room-numeral">I</span>
+          <div class="room-text">
+            <h2 class="room-name">The Study</h2>
+            <p class="mono room-desc">writing &amp; essays</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/observatory" class="doorway" data-room="observatory">
+        <div class="doorway-glow observatory-glow" aria-hidden="true"></div>
+        <div class="doorway-frame">
+          <span class="mono room-numeral">II</span>
+          <div class="room-text">
+            <h2 class="room-name">The Observatory</h2>
+            <p class="mono room-desc">cosmos &amp; pattern</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/workshop" class="doorway" data-room="workshop">
+        <div class="doorway-glow" aria-hidden="true"></div>
+        <div class="doorway-frame">
+          <span class="mono room-numeral">III</span>
+          <div class="room-text">
+            <h2 class="room-name">The Workshop</h2>
+            <p class="mono room-desc">product &amp; making</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/long-room" class="doorway" data-room="long-room">
+        <div class="doorway-glow" aria-hidden="true"></div>
+        <div class="doorway-frame">
+          <span class="mono room-numeral">IV</span>
+          <div class="room-text">
+            <h2 class="room-name">The Long Room</h2>
+            <p class="mono room-desc">shadow &amp; meaning</p>
+          </div>
+        </div>
+      </a>
+
+    </main>
+
+    <footer class="palace-footer">
+      <nav class="mono footer-nav" aria-label="Secondary pages">
+        <a href="/now">Now</a>
+        <span aria-hidden="true">·</span>
+        <a href="/about">About</a>
+      </nav>
+    </footer>
+
+  </div>
+</Base>
+
+<style>
+  /* ── Full-viewport layout ── */
+  .palace {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ambient centre glow — breathes like a light at the end of the corridor */
+  .palace::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 80vw;
+    height: 65vh;
+    background: radial-gradient(ellipse,
+      rgba(200, 152, 64, 0.06) 0%,
+      transparent 68%
+    );
+    pointer-events: none;
+    z-index: 0;
+    animation: ambient-drift 18s ease-in-out infinite;
+  }
+
+  @keyframes ambient-drift {
+    0%, 100% {
+      opacity: 0.75;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    30% {
+      opacity: 1;
+      transform: translate(-48%, -52%) scale(1.06);
+    }
+    65% {
+      opacity: 0.8;
+      transform: translate(-53%, -48%) scale(0.96);
+    }
+  }
+
+  .palace-header {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .site-name {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Room grid ── */
+  .threshold {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    align-content: center;
+    max-width: 560px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Individual doorway ── */
+  .doorway {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border: 1px solid rgba(200, 152, 64, 0.12);
+    background: linear-gradient(175deg,
+      rgba(200, 152, 64, 0.015) 0%,
+      rgba(200, 152, 64, 0.055) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition:
+      border-color  0.7s var(--ease-drift),
+      box-shadow    0.7s var(--ease-drift);
+  }
+
+  /* Warmth that breathes faintly at rest, blooms on approach */
+  .doorway-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 110%,
+      rgba(200, 152, 64, 0.14) 0%,
+      transparent 70%
+    );
+    opacity: 0.09;
+    transition: opacity 0.8s var(--ease-drift);
+    pointer-events: none;
+  }
+
+  .doorway:not(.unlit):hover {
+    border-color: rgba(200, 152, 64, 0.4);
+    box-shadow:
+      inset 0 -40px 60px rgba(200, 152, 64, 0.05),
+      0 0 50px rgba(200, 152, 64, 0.05);
+  }
+
+  .doorway:not(.unlit):hover .doorway-glow {
+    opacity: 1;
+  }
+
+  /* Observatory hover uses cold blue instead of gold */
+  .doorway[data-room="observatory"]:hover {
+    border-color: rgba(122, 172, 202, 0.35);
+    box-shadow:
+      inset 0 -40px 60px rgba(122, 172, 202, 0.04),
+      0 0 40px rgba(122, 172, 202, 0.04);
+  }
+
+  .observatory-glow {
+    background: radial-gradient(ellipse 80% 60% at 50% 110%,
+      rgba(122, 172, 202, 0.15) 0%,
+      transparent 70%
+    ) !important;
+  }
+
+  /* Unlit rooms — dark, present, not passable */
+  .doorway.unlit {
+    border-color: rgba(200, 152, 64, 0.05);
+    background: linear-gradient(175deg,
+      rgba(255, 255, 255, 0.005) 0%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+    opacity: 0.38;
+    cursor: default;
+  }
+
+  .doorway-frame {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.1rem 1.1rem 1.25rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .room-numeral {
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    color: var(--color-gold-dim);
+    text-transform: uppercase;
+  }
+
+  .doorway.unlit .room-numeral {
+    color: var(--color-text-muted);
+  }
+
+  .room-name {
+    font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-text);
+    transition: color 0.5s var(--ease-drift);
+    margin-bottom: 0.25rem;
+  }
+
+  .doorway:not(.unlit):hover .room-name {
+    color: var(--color-gold);
+  }
+
+  .room-desc {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Footer nav ── */
+  .palace-footer {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-nav {
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .footer-nav a {
+    color: var(--color-text-muted);
+    transition: color 0.35s var(--ease-drift);
+  }
+
+  .footer-nav a:hover {
+    color: var(--color-gold);
+    opacity: 1;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 480px) {
+    .palace {
+      padding: 1.25rem 1.25rem 1.5rem;
+    }
+
+    .threshold {
+      gap: 0.5rem;
+      padding: 1.5rem 0;
+    }
+
+    .doorway {
+      aspect-ratio: unset;
+      height: 148px;
+    }
+
+    .doorway-frame {
+      padding: 0.85rem;
+    }
+
+    .room-name {
+      font-size: 0.9rem;
+    }
+
+    .room-desc {
+      font-size: 0.55rem;
+    }
+
+    /* Footer nav — larger touch target */
+    .footer-nav a {
+      padding: 0.5rem 0;
+    }
+  }
+</style>

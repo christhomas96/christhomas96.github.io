@@ -1,0 +1,154 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const all = await getCollection('posts', ({ data }) => !data.draft);
+const posts = all
+  .filter(p => p.data.room === 'long-room')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function fmtDate(d: Date) {
+  return d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+}
+---
+
+<Base title="The Long Room — Chris Thomas" description="Shadow-work, meaning, the interior.">
+  <main class="room">
+    <a href="/" class="back mono">← threshold</a>
+
+    <header class="room-header">
+      <h1 class="room-name">The Long Room</h1>
+      <p class="room-intro">further in. shadow and meaning. the interior.</p>
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="empty">
+        nothing here yet.<br />
+        <span class="mono note">further in the house. the door is open.</span>
+      </p>
+    ) : (
+      <ul class="post-list">
+        {posts.map(post => (
+          <li class="post-item">
+            <a href={`/long-room/${post.id}`} class="post-link">
+              <p class="mono post-meta">
+                {fmtDate(post.data.date)}
+                {post.data.tags.length > 0 && <span class="tags"> · {post.data.tags.join(', ')}</span>}
+              </p>
+              <h2 class="post-title">{post.data.title}</h2>
+              <p class="post-excerpt">{post.data.excerpt}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </main>
+</Base>
+
+<style>
+  .room {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+    transition: color 0.3s var(--ease-drift);
+    opacity: 0.7;
+  }
+
+  .back:hover { color: var(--color-gold-dim); opacity: 1; }
+
+  .room-header {
+    margin-bottom: 4rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(46, 42, 36, 0.8);
+  }
+
+  .room-name {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    letter-spacing: 0.01em;
+    margin-bottom: 0.85rem;
+    color: var(--color-text);
+    font-weight: 400;
+  }
+
+  .room-intro {
+    font-style: italic;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    opacity: 0.75;
+    max-width: 42ch;
+  }
+
+  .empty {
+    font-style: italic;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    opacity: 0.6;
+    line-height: 2;
+  }
+
+  .note {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+  }
+
+  .post-list { list-style: none; }
+
+  .post-item { border-bottom: 1px solid rgba(46, 42, 36, 0.6); }
+
+  .post-link {
+    display: block;
+    padding: 2.25rem 0;
+    color: inherit;
+    transition: none;
+  }
+
+  .post-link:focus-visible {
+    outline: 2px solid var(--color-gold-dim);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .post-link:hover .post-title { color: var(--color-gold-dim); }
+
+  .post-meta {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+    opacity: 0.7;
+  }
+
+  .tags { text-transform: none; letter-spacing: 0.04em; }
+
+  .post-title {
+    font-size: clamp(1.2rem, 2.8vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 0.7rem;
+    color: var(--color-text);
+    transition: color 0.4s var(--ease-drift);
+    opacity: 0.85;
+  }
+
+  .post-excerpt {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    max-width: 58ch;
+    opacity: 0.8;
+  }
+</style>
